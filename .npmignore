@@ -10,6 +10,12 @@ tsup.config.ts
 .eslintrc*
 .prettierrc*
 
+# Source maps (exclude from npm package)
+dist/**/*.map
+
+# Duplicate type declarations (.d.mts)
+dist/**/*.d.mts
+
 # Tests
 test/
 tests/

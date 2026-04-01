@@ -5,7 +5,12 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false,
   clean: true,
   external: ['react', 'react-dom', 'vue'],
+  // Don't generate .d.mts files (duplicate type declarations)
+  tsconfigOptions: {
+    declaration: true,
+    declarationMap: false,
+  },
 });
