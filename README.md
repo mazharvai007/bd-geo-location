@@ -4,8 +4,9 @@ A comprehensive TypeScript package for Bangladesh's geographical administrative 
 
 ## Features
 
-- Complete geographical hierarchy of Bangladesh
+- **Complete data for Bangladesh**: 8 Divisions, 68 Districts, 531 Upazilas, 4,916 Unions
 - **JSON-based data format** - Easy to edit and extend without recompiling
+- **JSON Schema validation** - Ensures data integrity
 - TypeScript support with full type definitions
 - Framework-specific integrations:
   - React Hooks
@@ -14,6 +15,20 @@ A comprehensive TypeScript package for Bangladesh's geographical administrative 
 - Support for both English and Bengali names
 - Tree-shakeable and optimized bundle size
 - ES Modules and CommonJS support
+
+## Data Coverage
+
+| Division | Districts | Upazilas | Unions |
+|----------|-----------|----------|--------|
+| Barisal | 6 | 42 | 355 |
+| Chittagong | 12 | 117 | 1,052 |
+| Dhaka | 16 | 112 | 1,142 |
+| Khulna | 10 | 59 | 580 |
+| Mymensingh | 4 | 35 | 351 |
+| Rajshahi | 8 | 67 | 567 |
+| Rangpur | 8 | 58 | 533 |
+| Sylhet | 4 | 41 | 336 |
+| **Total** | **68** | **531** | **4,916** |
 
 ## Working with JSON Data
 
@@ -65,6 +80,18 @@ function getAllUpazilasInDivision(divisionId: string) {
 ```
 
 For more details on the JSON structure and how to extend it, see [DATA_STRUCTURE.md](./DATA_STRUCTURE.md).
+
+## Data Validation
+
+The package includes JSON Schema validation to ensure data integrity:
+
+```bash
+# Validate the JSON data
+npm run data:validate
+
+# Test the data
+npm run data:test
+```
 
 ## Installation
 

@@ -1,0 +1,58 @@
+# Source files (we publish dist/)
+src/
+scripts/
+*.ts
+!*.d.ts
+
+# Development files
+tsconfig.json
+tsup.config.ts
+.eslintrc*
+.prettierrc*
+
+# Tests
+test/
+tests/
+__tests__/
+coverage/
+.nyc_output
+
+# Documentation (except README)
+*.md
+!README.md
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.*
+!.npmrc
+
+# Build artifacts (except dist/)
+*.tgz
+
+# Misc
+.node_modules/
+.archive/
+SECURITY_REPORT.md
+DATA_STRUCTURE.md

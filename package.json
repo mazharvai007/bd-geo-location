@@ -27,6 +27,8 @@
     "build:watch": "tsup --watch",
     "dev": "tsup --watch",
     "prepublishOnly": "npm run build",
+    "data:validate": "node scripts/validate-data.js",
+    "data:test": "node scripts/test-data.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -50,7 +52,7 @@
     "vue",
     "angular"
   ],
-  "author": "",
+  "author": "Mazharul Islam",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -65,6 +67,8 @@
     "@rollup/plugin-typescript": "^12.3.0",
     "@types/node": "^25.5.0",
     "@types/react": "^19.0.12",
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1",
     "react": "^19.2.4",
     "rollup": "^4.60.1",
     "tslib": "^2.8.1",

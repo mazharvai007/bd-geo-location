@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bd-geo-location.com/schemas/bangladesh-geo.json",
+  "title": "Bangladesh Geographical Data",
+  "description": "Schema for Bangladesh administrative divisions hierarchy",
+  "type": "object",
+  "required": ["divisions"],
+  "properties": {
+    "divisions": {
+      "type": "array",
+      "description": "Array of divisions in Bangladesh",
+      "items": {
+        "$ref": "#/definitions/division"
+      }
+    }
+  },
+  "definitions": {
+    "division": {
+      "type": "object",
+      "required": ["id", "name", "nameBn", "districts"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Division ID",
+          "pattern": "^\\d{2}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Division name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "Division name in Bengali",
+          "minLength": 1
+        },
+        "districts": {
+          "type": "array",
+          "description": "Districts in this division",
+          "items": {
+            "$ref": "#/definitions/district"
+          }
+        }
+      }
+    },
+    "district": {
+      "type": "object",
+      "required": ["id", "name", "nameBn", "upazilas"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "District ID",
+          "pattern": "^\\d+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "District name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "District name in Bengali",
+          "minLength": 1
+        },
+        "cityCorporations": {
+          "type": "array",
+          "description": "City corporations in this district",
+          "items": {
+            "$ref": "#/definitions/cityCorporation"
+          }
+        },
+        "upazilas": {
+          "type": "array",
+          "description": "Upazilas in this district",
+          "items": {
+            "$ref": "#/definitions/upazila"
+          }
+        }
+      }
+    },
+    "cityCorporation": {
+      "type": "object",
+      "required": ["id", "name", "nameBn"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "City Corporation ID",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "City Corporation name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "City Corporation name in Bengali",
+          "minLength": 1
+        },
+        "thanas": {
+          "type": "array",
+          "description": "Thanas under this city corporation",
+          "items": {
+            "$ref": "#/definitions/upazila"
+          }
+        }
+      }
+    },
+    "upazila": {
+      "type": "object",
+      "required": ["id", "name", "nameBn"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Upazila ID",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Upazila name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "Upazila name in Bengali",
+          "minLength": 1
+        },
+        "unions": {
+          "type": "array",
+          "description": "Unions under this upazila",
+          "items": {
+            "$ref": "#/definitions/union"
+          }
+        },
+        "pourosovas": {
+          "type": "array",
+          "description": "Pourosovas under this upazila",
+          "items": {
+            "$ref": "#/definitions/pourosova"
+          }
+        }
+      }
+    },
+    "union": {
+      "type": "object",
+      "required": ["id", "name", "nameBn"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Union ID",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Union name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "Union name in Bengali",
+          "minLength": 1
+        },
+        "villages": {
+          "type": "array",
+          "description": "Villages under this union",
+          "items": {
+            "$ref": "#/definitions/village"
+          }
+        }
+      }
+    },
+    "pourosova": {
+      "type": "object",
+      "required": ["id", "name", "nameBn"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Pourosova ID",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Pourosova name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "Pourosova name in Bengali",
+          "minLength": 1
+        },
+        "villages": {
+          "type": "array",
+          "description": "Villages under this pourosova",
+          "items": {
+            "$ref": "#/definitions/village"
+          }
+        }
+      }
+    },
+    "village": {
+      "type": "object",
+      "required": ["id", "name", "nameBn"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Village ID",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Village name in English",
+          "minLength": 1
+        },
+        "nameBn": {
+          "type": "string",
+          "description": "Village name in Bengali",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
