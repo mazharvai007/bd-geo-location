@@ -54,9 +54,13 @@
   ],
   "author": "Mazharul Islam",
   "license": "MIT",
+  "homepage": "https://github.com/mazharvai007/bd-geo-location#readme",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/mazharvai007/bd-geo-location.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mazharvai007/bd-geo-location/issues"
   },
   "files": [
     "dist"
