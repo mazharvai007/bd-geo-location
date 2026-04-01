@@ -1,0 +1,273 @@
+{
+  "divisions": [
+    {
+      "id": "30",
+      "name": "Dhaka",
+      "nameBn": "ঢাকা",
+      "districts": [
+        {
+          "id": "26",
+          "name": "Dhaka",
+          "nameBn": "ঢাকা",
+          "cityCorporations": [
+            {
+              "id": "dhaka-south",
+              "name": "Dhaka South City Corporation",
+              "nameBn": "ঢাকা দক্ষিণ সিটি কর্পোরেশন"
+            },
+            {
+              "id": "dhaka-north",
+              "name": "Dhaka North City Corporation",
+              "nameBn": "ঢাকা উত্তর সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "dhaka-sadar",
+              "name": "Dhaka Sadar",
+              "nameBn": "ঢাকা সদর"
+            },
+            {
+              "id": "savar",
+              "name": "Savar",
+              "nameBn": "সাভার"
+            },
+            {
+              "id": "keraniganj",
+              "name": "Keraniganj",
+              "nameBn": "কেরানীগঞ্জ"
+            }
+          ]
+        },
+        {
+          "id": "38",
+          "name": "Gazipur",
+          "nameBn": "গাজীপুর",
+          "cityCorporations": [
+            {
+              "id": "gazipur",
+              "name": "Gazipur City Corporation",
+              "nameBn": "গাজীপুর সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "gazipur-sadar",
+              "name": "Gazipur Sadar",
+              "nameBn": "গাজীপুর সদর"
+            },
+            {
+              "id": "kaliakair",
+              "name": "Kaliakair",
+              "nameBn": "কালিয়াকৈর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Chittagong",
+      "nameBn": "চট্টগ্রাম",
+      "districts": [
+        {
+          "id": "20",
+          "name": "Chittagong",
+          "nameBn": "চট্টগ্রাম",
+          "cityCorporations": [
+            {
+              "id": "chittagong",
+              "name": "Chittagong City Corporation",
+              "nameBn": "চট্টগ্রাম সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "chittagong-sadar",
+              "name": "Chittagong Sadar",
+              "nameBn": "চট্টগ্রাম সদর"
+            },
+            {
+              "id": "patiya",
+              "name": "Patiya",
+              "nameBn": "পটিয়া"
+            }
+          ]
+        },
+        {
+          "id": "45",
+          "name": "Coxs Bazar",
+          "nameBn": "কক্সবাজার",
+          "upazilas": [
+            {
+              "id": "coxs-bazar-sadar",
+              "name": "Coxs Bazar Sadar",
+              "nameBn": "কক্সবাজার সদর"
+            },
+            {
+              "id": "ramu",
+              "name": "Ramu",
+              "nameBn": "রামু"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "40",
+      "name": "Rajshahi",
+      "nameBn": "রাজশাহী",
+      "districts": [
+        {
+          "id": "40",
+          "name": "Rajshahi",
+          "nameBn": "রাজশাহী",
+          "cityCorporations": [
+            {
+              "id": "rajshahi",
+              "name": "Rajshahi City Corporation",
+              "nameBn": "রাজশাহী সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "rajshahi-sadar",
+              "name": "Rajshahi Sadar",
+              "nameBn": "রাজশাহী সদর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "50",
+      "name": "Khulna",
+      "nameBn": "খুলনা",
+      "districts": [
+        {
+          "id": "55",
+          "name": "Khulna",
+          "nameBn": "খুলনা",
+          "cityCorporations": [
+            {
+              "id": "khulna",
+              "name": "Khulna City Corporation",
+              "nameBn": "খুলনা সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "khulna-sadar",
+              "name": "Khulna Sadar",
+              "nameBn": "খুলনা সদর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "60",
+      "name": "Sylhet",
+      "nameBn": "সিলেট",
+      "districts": [
+        {
+          "id": "65",
+          "name": "Sylhet",
+          "nameBn": "সিলেট",
+          "cityCorporations": [
+            {
+              "id": "sylhet",
+              "name": "Sylhet City Corporation",
+              "nameBn": "সিলেট সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "sylhet-sadar",
+              "name": "Sylhet Sadar",
+              "nameBn": "সিলেট সদর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "70",
+      "name": "Barisal",
+      "nameBn": "বরিশাল",
+      "districts": [
+        {
+          "id": "75",
+          "name": "Barisal",
+          "nameBn": "বরিশাল",
+          "cityCorporations": [
+            {
+              "id": "barisal",
+              "name": "Barisal City Corporation",
+              "nameBn": "বরিশাল সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "barisal-sadar",
+              "name": "Barisal Sadar",
+              "nameBn": "বরিশাল সদর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "80",
+      "name": "Rangpur",
+      "nameBn": "রংপুর",
+      "districts": [
+        {
+          "id": "85",
+          "name": "Rangpur",
+          "nameBn": "রংপুর",
+          "cityCorporations": [
+            {
+              "id": "rangpur",
+              "name": "Rangpur City Corporation",
+              "nameBn": "রংপুর সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "rangpur-sadar",
+              "name": "Rangpur Sadar",
+              "nameBn": "রংপুর সদর"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "90",
+      "name": "Mymensingh",
+      "nameBn": "ময়মনসিংহ",
+      "districts": [
+        {
+          "id": "95",
+          "name": "Mymensingh",
+          "nameBn": "ময়মনসিংহ",
+          "cityCorporations": [
+            {
+              "id": "mymensingh",
+              "name": "Mymensingh City Corporation",
+              "nameBn": "ময়মনসিংহ সিটি কর্পোরেশন"
+            }
+          ],
+          "upazilas": [
+            {
+              "id": "mymensingh-sadar",
+              "name": "Mymensingh Sadar",
+              "nameBn": "ময়মনসিংহ সদর"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
