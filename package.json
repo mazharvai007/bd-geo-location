@@ -1,6 +1,6 @@
 {
   "name": "bd-geo-location",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bangladesh geographical location data - Divisions, Districts, Upazilas/Thanas, Unions, Pourosovas, and Villages",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
