@@ -79,7 +79,9 @@
     "url": "https://github.com/mazharvai007/bd-geo-location/issues"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.2",
