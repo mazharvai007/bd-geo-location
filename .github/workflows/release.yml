@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.2)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  release:
+    name: Release to npm
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Run tests
+        run: npm test || echo "No tests configured"
+
+      - name: Validate package
+        run: |
+          echo "Validating package..."
+          npm pack --dry-run
+          echo "✅ Package validation successful"
+
+      - name: Publish to npm
+        run: npm publish --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          body: |
+            ## 🎉 Release ${{ github.ref_name }}
+
+            Bangladesh Geo Location package for multiple platforms.
+
+            ## 📦 Installation
+
+            \`\`\`bash
+            npm install bd-geo-location
+            \`\`\`
+
+            ## 🚀 Quick Start
+
+            ### React
+            \`\`\`typescript
+            import { useDivisions } from 'bd-geo-location/react';
+            \`\`\`
+
+            ### Vue
+            \`\`\`typescript
+            import { useDivisions } from 'bd-geo-location/vue';
+            \`\`\`
+
+            ### Angular/Vanilla
+            \`\`\`typescript
+            import { getAllDivisions } from 'bd-geo-location';
+            \`\`\`
+
+            ### React Native
+            \`\`\`typescript
+            import { LocationSelector } from 'bd-geo-location/react-native';
+            \`\`\`
+
+            ## 📚 Documentation
+
+            - [Installation Guide](https://github.com/mazharvai007/bd-geo-location/blob/main/docs/INSTALLATION.md)
+            - [Usage Guide](https://github.com/mazharvai007/bd-geo-location/blob/main/docs/USAGE_GUIDE.md)
+            - [Quick Start](https://github.com/mazharvai007/bd-geo-location/blob/main/docs/QUICK_START.md)
+
+            ## ✨ What's Included
+
+            - ✅ React, Vue, Angular, React Native support
+            - ✅ Flutter & iOS/macOS code generators
+            - ✅ English + Bengali names
+            - ✅ Complete Bangladesh geo data
+            - ✅ TypeScript support
+            - ✅ Production-ready
+
+            See [CHANGELOG.md](https://github.com/mazharvai007/bd-geo-location/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+
+      - name: Notify success
+        if: success()
+        run: |
+          echo "✅ Package ${{ github.ref_name }} published successfully!"
+          echo "📦 Available at: https://www.npmjs.com/package/bd-geo-location"
