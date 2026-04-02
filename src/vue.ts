@@ -142,12 +142,18 @@ export function useCityCorporations(
 }
 
 /**
- * Vue Composable: Search locations by name
+ * Vue Composable: Search locations by name (with input sanitization)
  */
 export function useSearch(searchTerm: Ref<string> | string = '') {
   const results = computed(() => {
     const term = typeof searchTerm === 'string' ? searchTerm : searchTerm.value;
-    if (!term) {
+
+    // Sanitize input - prevent DoS attacks
+    const sanitizedTerm = term.length > 100
+      ? term.substring(0, 100)
+      : term;
+
+    if (!sanitizedTerm) {
       return {
         divisions: [] as Division[],
         districts: [] as District[],
@@ -167,13 +173,13 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
       cityCorporations: [] as CityCorporation[],
     };
 
-    const lowerTerm = term.toLowerCase();
+    const lowerTerm = sanitizedTerm.toLowerCase();
 
     for (const division of bangladeshData.divisions) {
       // Check division
       if (
         division.name.toLowerCase().includes(lowerTerm) ||
-        division.nameBn.includes(term)
+        division.nameBn.includes(sanitizedTerm)
       ) {
         searchResults.divisions.push(division);
       }
@@ -183,7 +189,7 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
         for (const district of division.districts) {
           if (
             district.name.toLowerCase().includes(lowerTerm) ||
-            district.nameBn.includes(term)
+            district.nameBn.includes(sanitizedTerm)
           ) {
             searchResults.districts.push(district);
           }
@@ -193,7 +199,7 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
             for (const upazila of district.upazilas) {
               if (
                 upazila.name.toLowerCase().includes(lowerTerm) ||
-                upazila.nameBn.includes(term)
+                upazila.nameBn.includes(sanitizedTerm)
               ) {
                 searchResults.upazilas.push(upazila);
               }
@@ -203,7 +209,7 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
                 for (const union of upazila.unions) {
                   if (
                     union.name.toLowerCase().includes(lowerTerm) ||
-                    union.nameBn.includes(term)
+                    union.nameBn.includes(sanitizedTerm)
                   ) {
                     searchResults.unions.push(union);
                   }
@@ -215,7 +221,7 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
                 for (const pourosova of upazila.pourosovas) {
                   if (
                     pourosova.name.toLowerCase().includes(lowerTerm) ||
-                    pourosova.nameBn.includes(term)
+                    pourosova.nameBn.includes(sanitizedTerm)
                   ) {
                     searchResults.pourosovas.push(pourosova);
                   }
@@ -229,7 +235,7 @@ export function useSearch(searchTerm: Ref<string> | string = '') {
             for (const cityCorp of district.cityCorporations) {
               if (
                 cityCorp.name.toLowerCase().includes(lowerTerm) ||
-                cityCorp.nameBn.includes(term)
+                cityCorp.nameBn.includes(sanitizedTerm)
               ) {
                 searchResults.cityCorporations.push(cityCorp);
               }

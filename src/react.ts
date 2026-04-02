@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import bangladeshJson from './data/bangladesh.json';
 import {
   Division,
@@ -25,23 +25,23 @@ export function useDivisions() {
  * React Hook: Get districts by division ID
  */
 export function useDistricts(divisionId: string | null) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!divisionId) return [];
     const division = bangladeshData.divisions.find((d) => d.id === divisionId);
     return division?.districts || [];
-  }, [divisionId])();
+  }, [divisionId]);
 }
 
 /**
  * React Hook: Get upazilas by district ID
  */
 export function useUpazilas(districtId: string | null, divisionId: string | null) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!districtId || !divisionId) return [];
     const division = bangladeshData.divisions.find((d) => d.id === divisionId);
     const district = division?.districts?.find((dist) => dist.id === districtId);
     return district?.upazilas || [];
-  }, [districtId, divisionId])();
+  }, [districtId, divisionId]);
 }
 
 /**
@@ -52,13 +52,13 @@ export function useUnions(
   districtId: string | null,
   divisionId: string | null
 ) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!upazilaId || !districtId || !divisionId) return [];
     const division = bangladeshData.divisions.find((d) => d.id === divisionId);
     const district = division?.districts?.find((dist) => dist.id === districtId);
     const upazila = district?.upazilas?.find((u) => u.id === upazilaId);
     return upazila?.unions || [];
-  }, [upazilaId, districtId, divisionId])();
+  }, [upazilaId, districtId, divisionId]);
 }
 
 /**
@@ -69,33 +69,38 @@ export function usePourosovas(
   districtId: string | null,
   divisionId: string | null
 ) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!upazilaId || !districtId || !divisionId) return [];
     const division = bangladeshData.divisions.find((d) => d.id === divisionId);
     const district = division?.districts?.find((dist) => dist.id === districtId);
     const upazila = district?.upazilas?.find((u) => u.id === upazilaId);
     return upazila?.pourosovas || [];
-  }, [upazilaId, districtId, divisionId])();
+  }, [upazilaId, districtId, divisionId]);
 }
 
 /**
  * React Hook: Get city corporations by district ID
  */
 export function useCityCorporations(districtId: string | null, divisionId: string | null) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!districtId || !divisionId) return [];
     const division = bangladeshData.divisions.find((d) => d.id === divisionId);
     const district = division?.districts?.find((dist) => dist.id === districtId);
     return district?.cityCorporations || [];
-  }, [districtId, divisionId])();
+  }, [districtId, divisionId]);
 }
 
 /**
- * React Hook: Search locations by name
+ * React Hook: Search locations by name (with input sanitization)
  */
 export function useSearch(searchTerm: string) {
-  return useCallback(() => {
-    if (!searchTerm) {
+  return useMemo(() => {
+    // Sanitize input - prevent DoS attacks
+    const sanitizedTerm = searchTerm.length > 100
+      ? searchTerm.substring(0, 100)
+      : searchTerm;
+
+    if (!sanitizedTerm) {
       return {
         divisions: [],
         districts: [],
@@ -106,7 +111,7 @@ export function useSearch(searchTerm: string) {
       };
     }
 
-    const term = searchTerm.toLowerCase();
+    const term = sanitizedTerm.toLowerCase();
     const results = {
       divisions: [] as Division[],
       districts: [] as District[],
@@ -120,7 +125,7 @@ export function useSearch(searchTerm: string) {
       // Check division
       if (
         division.name.toLowerCase().includes(term) ||
-        division.nameBn.includes(searchTerm)
+        division.nameBn.includes(sanitizedTerm)
       ) {
         results.divisions.push(division);
       }
@@ -130,7 +135,7 @@ export function useSearch(searchTerm: string) {
         for (const district of division.districts) {
           if (
             district.name.toLowerCase().includes(term) ||
-            district.nameBn.includes(searchTerm)
+            district.nameBn.includes(sanitizedTerm)
           ) {
             results.districts.push(district);
           }
@@ -140,7 +145,7 @@ export function useSearch(searchTerm: string) {
             for (const upazila of district.upazilas) {
               if (
                 upazila.name.toLowerCase().includes(term) ||
-                upazila.nameBn.includes(searchTerm)
+                upazila.nameBn.includes(sanitizedTerm)
               ) {
                 results.upazilas.push(upazila);
               }
@@ -150,7 +155,7 @@ export function useSearch(searchTerm: string) {
                 for (const union of upazila.unions) {
                   if (
                     union.name.toLowerCase().includes(term) ||
-                    union.nameBn.includes(searchTerm)
+                    union.nameBn.includes(sanitizedTerm)
                   ) {
                     results.unions.push(union);
                   }
@@ -162,7 +167,7 @@ export function useSearch(searchTerm: string) {
                 for (const pourosova of upazila.pourosovas) {
                   if (
                     pourosova.name.toLowerCase().includes(term) ||
-                    pourosova.nameBn.includes(searchTerm)
+                    pourosova.nameBn.includes(sanitizedTerm)
                   ) {
                     results.pourosovas.push(pourosova);
                   }
@@ -176,7 +181,7 @@ export function useSearch(searchTerm: string) {
             for (const cityCorp of district.cityCorporations) {
               if (
                 cityCorp.name.toLowerCase().includes(term) ||
-                cityCorp.nameBn.includes(searchTerm)
+                cityCorp.nameBn.includes(sanitizedTerm)
               ) {
                 results.cityCorporations.push(cityCorp);
               }
@@ -187,7 +192,7 @@ export function useSearch(searchTerm: string) {
     }
 
     return results;
-  }, [searchTerm])();
+  }, [searchTerm]);
 }
 
 /**
@@ -197,7 +202,7 @@ export function useLocationById(
   id: string | null,
   type: 'division' | 'district' | 'upazila' | 'union' | 'pourosova' | 'cityCorporation'
 ) {
-  return useCallback(() => {
+  return useMemo(() => {
     if (!id) return null;
 
     switch (type) {
@@ -254,7 +259,7 @@ export function useLocationById(
       default:
         return null;
     }
-  }, [id, type])();
+  }, [id, type]);
 }
 
 // Export types for React users

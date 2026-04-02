@@ -20,6 +20,11 @@
       "require": "./dist/vue.js",
       "import": "./dist/vue.mjs",
       "types": "./dist/vue.d.ts"
+    },
+    "./react-native": {
+      "require": "./dist/react-native.js",
+      "import": "./dist/react-native.mjs",
+      "types": "./dist/react-native.d.ts"
     }
   },
   "scripts": {
@@ -30,6 +35,10 @@
     "prepublishOnly": "npm run build",
     "data:validate": "node scripts/validate-data.js",
     "data:test": "node scripts/test-data.js",
+    "generate:dart": "node scripts/generate-dart-models.js",
+    "generate:swift": "node scripts/generate-swift-models.js",
+    "generate:react-native": "node scripts/generate-react-native-code.js",
+    "generate:all": "npm run generate:dart && npm run generate:swift && npm run generate:react-native",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -51,7 +60,13 @@
     "typescript",
     "react",
     "vue",
-    "angular"
+    "angular",
+    "react-native",
+    "flutter",
+    "dart",
+    "ios",
+    "swift",
+    "mobile"
   ],
   "author": "Mazharul Islam",
   "license": "MIT",
@@ -83,13 +98,17 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "react-native": ">=0.60.0"
   },
   "peerDependenciesMeta": {
     "react": {
       "optional": true
     },
     "vue": {
+      "optional": true
+    },
+    "react-native": {
       "optional": true
     }
   }
