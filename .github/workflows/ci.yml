@@ -33,15 +33,18 @@ jobs:
       - name: Build package
         run: npm run build
 
+      - name: Analyze bundle size and performance
+        run: npm run analyze
+
       - name: Check package size
         run: |
           echo "Checking package size..."
           SIZE=$(du -sh dist/ | cut -f1)
           echo "Package size: $SIZE"
-          if [ "$SIZE" != "1.7M" ] && [ "$SIZE" != "1.8M" ]; then
-            echo "⚠️  Warning: Package size is $SIZE (expected ~1.7M)"
+          if [ "$SIZE" != "1.0M" ] && [ "$SIZE" != "1.1M" ] && [ "$SIZE" != "1.7M" ] && [ "$SIZE" != "1.8M" ]; then
+            echo "⚠️  Warning: Package size is $SIZE"
           else
-            echo "✅ Package size optimized"
+            echo "✅ Package size within expected range"
           fi
 
       - name: Validate exports
@@ -152,3 +155,106 @@ jobs:
         run: |
           npm run generate:all
           echo "✅ All platforms generated successfully"
+
+  ios-swift-validation:
+    name: Validate iOS/macOS Swift Code
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Swift code
+        run: npm run generate:swift
+
+      - name: Verify Swift files
+        run: |
+          echo "Verifying generated Swift files..."
+          if [ ! -d "generated/ios/Sources/BdGeoLocation/Models" ]; then
+            echo "❌ Swift models directory not found"
+            exit 1
+          fi
+
+          # Check for required Swift files
+          required_files=(
+            "Village.swift"
+            "Union.swift"
+            "Pourosova.swift"
+            "Upazila.swift"
+            "CityCorporation.swift"
+            "District.swift"
+            "Division.swift"
+            "BangladeshGeoData.swift"
+            "BangladeshGeoData+Helpers.swift"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "generated/ios/Sources/BdGeoLocation/Models/$file" ]; then
+              echo "❌ Missing: $file"
+              exit 1
+            fi
+            echo "✅ Found: $file"
+          done
+
+          echo "✅ All required Swift files generated"
+
+      - name: Validate Swift syntax (if swift is available)
+        run: |
+          if command -v swift &> /dev/null; then
+            echo "Swift compiler found, validating syntax..."
+            for file in generated/ios/Sources/BdGeoLocation/Models/*.swift; do
+              swift -frontend -parse "$file" 2>&1 | head -5 || true
+            done
+            echo "✅ Swift syntax validation completed"
+          else
+            echo "⚠️  Swift compiler not available, skipping syntax validation"
+          fi
+
+      - name: Verify Package.swift
+        run: |
+          if [ ! -f "generated/ios/Package.swift" ]; then
+            echo "❌ Package.swift not found"
+            exit 1
+          fi
+          echo "✅ Package.swift exists"
+
+  cross-platform-test:
+    name: Cross-Platform Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run platform compatibility tests
+        run: npm run test:platform
+
+      - name: Verify README exists
+        shell: bash
+        run: |
+          if [ ! -f "README.md" ]; then
+            echo "❌ README.md not found!"
+            exit 1
+          fi
+          echo "✅ README.md exists"

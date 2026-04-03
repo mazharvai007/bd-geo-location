@@ -246,6 +246,42 @@ npm run generate:react-native
 npm run generate:all
 ```
 
+### Cross-Platform Support
+
+This package is designed to work seamlessly across all operating systems:
+
+- ✅ **Windows** (PowerShell, CMD, Git Bash)
+- ✅ **Linux** (All distributions)
+- ✅ **macOS** (Intel & Apple Silicon)
+
+All scripts use Node.js for maximum compatibility and work the same way on all platforms.
+
+**Available Scripts:**
+
+| Script | Description |
+|--------|-------------|
+| `npm run build` | Build the package |
+| `npm run build:watch` | Build in watch mode |
+| `npm run build:clean` | Clean build artifacts |
+| `npm run data:validate` | Validate geo data integrity |
+| `npm run data:test` | Test data functionality |
+| `npm run generate:dart` | Generate Flutter/Dart models |
+| `npm run generate:swift` | Generate iOS/macOS Swift models |
+| `npm run generate:react-native` | Generate React Native components |
+| `npm run generate:all` | Generate all platform code |
+| `npm run test:platform` | Test cross-platform compatibility |
+
+**Test Your Setup:**
+
+```bash
+# Run comprehensive cross-platform tests
+npm run test:platform
+```
+
+This verifies all functionality works correctly on your platform.
+
+**Note:** If you encounter any issues running scripts on Windows, make sure you have Node.js installed and run commands from a terminal (PowerShell, CMD, or Git Bash).
+
 [📖 Detailed Installation Guide](./docs/INSTALLATION.md)
 
 ## Data Hierarchy

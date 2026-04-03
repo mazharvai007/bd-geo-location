@@ -1,6 +1,6 @@
 {
   "name": "bd-geo-location",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Bangladesh geographical location data - Divisions, Districts, Upazilas/Thanas, Unions, Pourosovas, and Villages",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -30,15 +30,17 @@
   "scripts": {
     "build": "tsup && npm run build:clean",
     "build:watch": "tsup --watch",
-    "build:clean": "find dist -name '*.d.mts' -delete && find dist -name '*.map' -delete",
+    "build:clean": "node scripts/clean-dist.js",
     "dev": "tsup --watch",
     "prepublishOnly": "npm run build",
     "data:validate": "node scripts/validate-data.js",
     "data:test": "node scripts/test-data.js",
+    "analyze": "node scripts/analyze-bundle.js",
     "generate:dart": "node scripts/generate-dart-models.js",
     "generate:swift": "node scripts/generate-swift-models.js",
     "generate:react-native": "node scripts/generate-react-native-code.js",
     "generate:all": "npm run generate:dart && npm run generate:swift && npm run generate:react-native",
+    "test:platform": "node test-platform.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
